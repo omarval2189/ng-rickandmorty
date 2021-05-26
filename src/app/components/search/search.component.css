@@ -1,0 +1,6 @@
+.card {
+  cursor: pointer;
+}
+.card-body {
+  min-height: 6rem;
+}

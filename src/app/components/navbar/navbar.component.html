@@ -1,0 +1,11 @@
+<nav class="navbar navbar-light bg-light mb-3">
+  <div class="container">
+    <a class="navbar-brand" href="#/home">Home</a>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Name of character" aria-label="Search" #searchText>
+      <button (click)="search(searchText.value)"
+        class="btn btn-primary" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+

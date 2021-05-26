@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-center mt-5 animated fadeIn fast" *ngIf="loading">
+    <div class="spinner-border justify-content-md-center" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+
+  <div class="row justify-content-md-center animated fadeIn fast" *ngIf="!loading && !error">
+    <div class="col-4" *ngIf="showUnselectedChar">
+      <div class="card">
+        <img class="card-img-top" src="https://rickandmortyapi.com/api/character/avatar/19.jpeg" alt="No Character selecred">
+        <div class="card-body">
+          <p class="card-text">No Character selected</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4" *ngIf="!showUnselectedChar">
+      <div class="card">
+        <img class="card-img-top" [src]="selectedChar.image" [alt]="selectedChar.name">
+        <div class="card-body">
+          <h5 class="card-title">{{selectedChar.name}}</h5>
+          <p class="card-text">Status: <span>{{selectedChar.status}}</span></p>
+          <p class="card-text">Species: <span>{{selectedChar.species}}</span></p>
+          <p class="card-text">Gender: <span>{{selectedChar.gender}}</span></p>
+          <p class="card-text">Origin: <span>{{selectedChar.origin.name}}</span></p>
+          <p class="card-text">Last seen: <span>{{selectedChar.location.name}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="row">
+        <div class="col-4 mb-4" (click)="selectChar(char)" *ngFor="let char of characters; let i = index">
+          <div class="card">
+            <img class="card-img-top" [src]="char.image" [alt]="char.name">
+            <div class="card-body">
+              <h5 class="card-title">{{char.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    <h4 class="alert-heading">Oops!</h4>
+    <p>Looks like we were not able to find what you searched.</p>
+    <hr>
+    <p class="mb-0">Please try again or reach directly with the administration at <span class="text-underline">+1 (xx) xx-xxxx-xxxx</span>.</p>
+  </div>
+
+  <nav aria-label="Pagination" *ngIf="!loading && totalPages && !error">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#/search/{{term}}/{{page-1}}" *ngIf="page>1">Previous</a>
+      </li>
+      <li class="page-item" [ngClass]="{'active' : page == (i+1) }" *ngFor="let a of counter(totalPages); let i = index;">
+        <a class="page-link" href="#/search/{{term}}/{{i+1}}">{{i+1}}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#/search/{{term}}/{{convertToInt(page)+1}}" *ngIf="page!=totalPages">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
